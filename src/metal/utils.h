@@ -85,11 +85,23 @@ void launchFunction(NS::SharedPtr<MTL::Device> device,
     // Determine threads per threadgroup
     size_t maxThreadsPerThreadgroup =
         pipelineState->maxTotalThreadsPerThreadgroup();
+
+    // Apple GPU wavefront size (thread execution width)
+    const size_t waveSize = 32;
+
+    // Pick a threads-per-threadgroup count that is:
+    // 1. <= max allowed by pipeline
+    // 2. Multiple of waveSize (avoid underutilized waves)
     size_t threadsPerThreadgroupCount =
-        std::min<size_t>(n_threads, maxThreadsPerThreadgroup);
+        std::min(static_cast<size_t>(n_threads), maxThreadsPerThreadgroup);
+    threadsPerThreadgroupCount =
+        (threadsPerThreadgroupCount / waveSize) * waveSize;
+    if (threadsPerThreadgroupCount == 0) threadsPerThreadgroupCount = waveSize;
+
     MTL::Size threadsPerThreadgroup =
         MTL::Size(threadsPerThreadgroupCount, 1, 1);
 
+    // Compute number of threadgroups needed to cover n_threads
     size_t numThreadgroups = (n_threads + threadsPerThreadgroupCount - 1) /
                              threadsPerThreadgroupCount;
     MTL::Size threadGroupsPerGrid = MTL::Size(numThreadgroups, 1, 1);
