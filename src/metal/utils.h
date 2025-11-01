@@ -12,7 +12,7 @@
                       << std::endl;                                \
             exit(1);                                               \
         }                                                          \
-    } while (0)
+    } while (false)
 
 NS::SharedPtr<MTL::Device> getDevice();
 
