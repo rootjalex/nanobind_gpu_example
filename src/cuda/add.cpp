@@ -7,8 +7,8 @@ GPUVector<float> vecf_add(const GPUVector<float>& a, const GPUVector<float>& b) 
     return make_gpu_vector(result, n);
 }
 
-void vecf_add_out(const GPUVector<float>& a, const GPUVector<float>& b, GPUVector<float>& out) {
-    // TODO
+void vecf_add_out(const GPUVector<float>& a, const GPUVector<float>& b,
+                  GPUVector<float>& out) {
     const uint64_t n = a.shape(0);
     gpu_add_out_f32(a.data(), b.data(), out.data(), n);
 }

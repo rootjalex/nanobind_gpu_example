@@ -16,6 +16,7 @@ Installation
 3. Run `pip install .`
 
 Afterwards, you should be able to run the test, which profiles Torch MPS versus raw Metal with nanobind and Torch CPU.
+Note: you need to have `torch` installed for the test to run.
 
 ```bash
 python tests/test_basic.py
