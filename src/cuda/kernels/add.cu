@@ -1,8 +1,10 @@
-#include "add.h"
-
 #include <cuda_runtime.h>
+
 #include <iostream>
 #include <sstream>
+
+#include "add.h"
+#include "utils.h"
 
 template<typename value_t, typename size_t>
 __global__ void add_kernel(value_t *__restrict__ r, const value_t *__restrict__ a, const value_t *__restrict__ b, const size_t n) {
@@ -16,6 +18,7 @@ float *gpu_add_f32(const float *x, const float *y, const uint64_t n) {
     float *result;
     CHECK_CUDA( cudaMalloc(&result, n * sizeof(float)) );
     gpu_add_out_f32(x, y, result, n);
+    return result;
 }
 
 void gpu_add_out_f32(const float *x, const float *y, float *result, const uint64_t n) {
@@ -30,6 +33,5 @@ void gpu_add_out_f32(const float *x, const float *y, float *result, const uint64
     add_kernel<float, uint64_t><<<blocksPerGrid, threadsPerBlock>>>(result, x, y, n);
 
     CHECK_CUDA( cudaGetLastError() );
-
-    return result;
 }
+
