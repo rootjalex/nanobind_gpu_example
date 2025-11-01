@@ -92,7 +92,7 @@ if(HAS_CUDA)
   list(GET GPU_ARCH_LIST 0 GPU_ARCH)
   message(STATUS "Detected GPU architecture: ${GPU_ARCH}")
 
-  set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O3 -arch=${GPU_ARCH} -dc")
+  set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O3 -arch=${GPU_ARCH}")
   add_compile_definitions(USE_CUDA)
 
 # ------------------------------------------------------------------------------
