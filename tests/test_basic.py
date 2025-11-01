@@ -51,7 +51,7 @@ def test_gpu_add(n: int, device_type: str):
         # Drop low and high outliers, take average of remaining
         torch_times.sort()
         avg_ms = sum(torch_times[1:-1]) / (len(torch_times) - 2)
-        print(f"Torch MPS: {avg_ms:.3f} ms")
+        print(f"Torch {device_type}: {avg_ms:.3f} ms")
 
     torch_sync()
     # Warmup (important to trigger GPU pipeline compilation)
