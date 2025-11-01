@@ -2,7 +2,8 @@
 
 
 #if defined(USE_CUDA)
-// TODO
+#include "cuda/add.h"
+#include "cuda/utils.h"
 #elif defined(USE_METAL)
 #include "metal/add.h"
 #include "metal/utils.h"
