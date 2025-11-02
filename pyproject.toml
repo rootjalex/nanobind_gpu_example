@@ -21,7 +21,9 @@ Homepage = "https://github.com/rootjalex/nanobind_gpu_example"
 [dependency-groups]
 dev = [
     "cmake>=4.1",
-    "torch"
+    "numpy",
+    "pytest",
+    "torch",
 ]
 
 [tool.scikit-build]
