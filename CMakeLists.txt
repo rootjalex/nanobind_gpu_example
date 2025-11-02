@@ -40,7 +40,7 @@ find_package(
 )
 
 # Import nanobind through CMake's find_package mechanism
-find_package(nanobind CONFIG REQUIRED)
+find_package(nanobind REQUIRED HINTS "${Python_SITEARCH}")
 
 # ------------------------------------------------------------------------------
 # Project target

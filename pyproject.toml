@@ -1,5 +1,5 @@
 [build-system]
-requires = ["scikit-build-core >=0.10", "nanobind >=1.3.2"]
+requires = ["scikit-build-core>=0.10", "nanobind>=1.3.2"]
 build-backend = "scikit_build_core.build"
 
 [project]
@@ -21,6 +21,7 @@ Homepage = "https://github.com/rootjalex/nanobind_gpu_example"
 [dependency-groups]
 dev = [
     "cmake>=4.0",
+    "nanobind>=1.3.2",
     "numpy",
     "pytest",
     "torch",
