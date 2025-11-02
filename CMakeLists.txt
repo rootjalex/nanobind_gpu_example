@@ -61,5 +61,7 @@ nanobind_add_module(
 
 add_subdirectory(src)
 
-# Install directive for scikit-build-core
-install(TARGETS nanobind_gpu_example_ext LIBRARY DESTINATION nanobind_gpu_example)
+if (SKBUILD)
+    install(TARGETS nanobind_gpu_example_ext
+            LIBRARY DESTINATION nanobind_gpu_example)
+endif ()
