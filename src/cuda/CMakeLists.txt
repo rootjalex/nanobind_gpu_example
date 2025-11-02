@@ -1,3 +1,5 @@
+enable_language(CUDA)
+
 find_package(CUDAToolkit REQUIRED)
 
 target_sources(

@@ -17,7 +17,6 @@ endif ()
 set(GPU_BACKEND "${GPU_BACKEND}" CACHE STRING "GPU backend to use (cuda or metal)")
 
 if (NOT GPU_BACKEND MATCHES "cuda|metal")
-    enable_language(CUDA)
     message(FATAL_ERROR "Unsupported GPU_BACKEND: ${GPU_BACKEND}. Supported backends are 'cuda' and 'metal'.")
 endif ()
 
