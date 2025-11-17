@@ -26,8 +26,8 @@ void gpu_add_out_f32(const float *x, const float *y, float *result, const uint64
     static int blockSize = -1;
     if (blockSize == -1) {
         // Only run the first call
-	// Get device properties
-	int device;
+        // Get device properties
+        int device;
         CHECK_CUDA(cudaGetDevice(&device));
 
         cudaDeviceProp prop;
