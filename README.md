@@ -24,7 +24,7 @@ Afterward, you should be able to run the test suite, which profiles Torch MPS
 against raw Metal with nanobind and Torch CPU.
 
 ```bash
-% pytest -vs
+% uv run pytest -vs
 ============================= test session starts =============================
 platform darwin -- Python 3.13.9, pytest-8.4.2, pluggy-1.6.0 -- /path/to/nanobind_gpu_example/.venv/bin/python3
 cachedir: .pytest_cache

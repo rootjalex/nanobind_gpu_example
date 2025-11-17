@@ -9,3 +9,5 @@ build
 .vs
 metal-cpp/
 venv/
+uv.lock
+
