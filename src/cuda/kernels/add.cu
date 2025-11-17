@@ -23,21 +23,25 @@ float *gpu_add_f32(const float *x, const float *y, const uint64_t n) {
 
 void gpu_add_out_f32(const float *x, const float *y, float *result, const uint64_t n) {
     // Get device properties
-    int device;
-    CHECK_CUDA(cudaGetDevice(&device));
+    static int blockSize = -1;
+    if (blockSize == -1) {
+        // Only run the first call
+	// Get device properties
+	int device;
+        CHECK_CUDA(cudaGetDevice(&device));
 
-    cudaDeviceProp prop;
-    cudaGetDeviceProperties(&prop, device);
+        cudaDeviceProp prop;
+        cudaGetDeviceProperties(&prop, device);
 
-    // Get a good launch config based on occupancy
-    int minGridSize = 0, blockSize = 0;
-    CHECK_CUDA(cudaOccupancyMaxPotentialBlockSize(
-        &minGridSize,
-        &blockSize,
-        add_kernel<float, uint64_t>,
-        0,           // dynamic shared memory per block
-        n            // maximum threads to consider
-    ));
+        // Get a good launch config based on occupancy
+        int minGridSize = 0;
+        CHECK_CUDA(cudaOccupancyMaxPotentialBlockSize(
+            &minGridSize,
+            &blockSize,
+            add_kernel<float, uint64_t>,
+            0           // dynamic shared memory per block
+        ));
+    }
     int gridSize = (n + blockSize - 1) / blockSize;
 
     add_kernel<float, uint64_t><<<gridSize, blockSize>>>(result, x, y, n);
