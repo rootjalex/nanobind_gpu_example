@@ -16,7 +16,6 @@ NS::SharedPtr<MTL::Function> getVecAddFunction() {
 
 void launch_add(NS::SharedPtr<MTL::Device> device, const MTL::Buffer *a, const MTL::Buffer *b, const MTL::Buffer *out, const size_t N) {
     auto function = getVecAddFunction();
-    uint nValue = static_cast<uint>(N);
     const uint32_t N_value = static_cast<uint32_t>(N);
     launchFunction(device, function, N, a, b, out, N_value);
 }

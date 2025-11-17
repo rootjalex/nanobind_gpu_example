@@ -7,9 +7,9 @@ target_sources(
     add.h
     metal_impl.cpp
     metal_impl.h
-    nb_utils.h
     utils.cpp
     utils.h
+    kernels/free.h
 )
 
 target_compile_definitions(
@@ -22,4 +22,10 @@ target_link_libraries(
     nanobind_gpu_example_ext
     PRIVATE
     MetalCPP::MetalCPP
+)
+
+target_include_directories(
+    nanobind_gpu_example_ext
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )

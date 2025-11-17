@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "metal_impl.h"
+#include "nb_utils.h"
 
 #define CHECK_METAL_ERROR(err)                                     \
     do {                                                           \
@@ -121,3 +122,13 @@ MTL::Buffer* makeDeviceBuffer(NS::SharedPtr<MTL::Device> device,
 }
 
 void synchronize();
+
+template <typename T>
+MTL::Buffer* get_mtl_buffer(const GPUVector<T>& gpu_vec) {
+    auto ptr = reinterpret_cast<MTL::Buffer*>(gpu_vec.data());
+    if (ptr) {
+        return ptr;
+    }
+    std::cerr << "Failed to get mtl buffer from ndarray" << std::endl;
+    exit(-1);
+}
