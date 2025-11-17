@@ -6,7 +6,7 @@
 namespace nb = nanobind;
 
 #if defined(USE_CUDA)
-#include "free.h"
+#include "cuda/kernels/free.h"
 using gpu_device = nb::device::cuda;
 #elif defined(USE_METAL)
 #include "metal/kernels/free.h"
