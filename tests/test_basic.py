@@ -1,6 +1,9 @@
-import nanobind_gpu_example
-import torch
 import time
+
+import nanobind_gpu_example
+import pytest
+import torch
+
 
 def get_torch_sync(device_type: str):
     """Synchronize GPU execution depending on backend."""
@@ -11,18 +14,24 @@ def get_torch_sync(device_type: str):
     else:
         raise RuntimeError(f"Unsupported device type: {device_type}")
 
-def detect_device():
+
+@pytest.fixture(scope="module")
+def device_type():
     """Detect if CUDA or MPS is available; return ('cuda' | 'mps')."""
     if torch.cuda.is_available():
-        print("Using NVIDIA CUDA backend.")
+        print("\nUsing NVIDIA CUDA backend.")
         return "cuda"
     elif getattr(torch.backends, "mps", None) and torch.backends.mps.is_available():
-        print("Using Apple Metal (MPS) backend.")
+        print("\nUsing Apple Metal (MPS) backend.")
         return "mps"
     else:
-        raise RuntimeError("No supported GPU backend found (CUDA or MPS).")
+        pytest.skip("No supported GPU backend found (CUDA or MPS).")
 
+
+@pytest.mark.parametrize("n", [10 ** i for i in range(2, 10)])
 def test_gpu_add(n: int, device_type: str):
+    print()
+
     device = torch.device(device_type)
     x = torch.randn(n, dtype=torch.float32, device=device)
     y = torch.randn(n, dtype=torch.float32, device=device)
@@ -96,16 +105,8 @@ def test_gpu_add(n: int, device_type: str):
 
     cpu_times.sort()
     avg_ms = sum(cpu_times[1:-1]) / (len(cpu_times) - 2)
-    print(f"Torch CPU: {avg_ms:.3f} ms\n")
+    print(f"Torch CPU: {avg_ms:.3f} ms")
 
     torch_cpu = r_torch.to("cpu")
 
     assert torch.equal(r_cpu, torch_cpu), "Mismatch between Torch (CPU) and Torch (GPU) results"
-
-if __name__ == "__main__":
-    device_type = detect_device()
-
-    for i in range(2, 10):
-        n = 10 ** i
-        print(f"Input size: {n}")
-        test_gpu_add(n, device_type)
