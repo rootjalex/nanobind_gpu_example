@@ -1,3 +1,3 @@
 #pragma once
 
-void cudaFreeWrapper(void* ptr) noexcept;
+void releaseBuffer(void* ptr) noexcept;

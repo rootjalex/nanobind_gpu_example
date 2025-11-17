@@ -5,7 +5,6 @@ target_sources(
     PRIVATE
     add.cpp
     add.h
-    nb_utils.h
     utils.h
     kernels/add.cu
     kernels/add.h
@@ -25,4 +24,10 @@ target_link_libraries(
     nanobind_gpu_example_ext
     PRIVATE
     CUDA::cudart
+)
+
+target_include_directories(
+    nanobind_gpu_example_ext
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )

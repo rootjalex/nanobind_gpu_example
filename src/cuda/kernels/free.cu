@@ -3,7 +3,7 @@
 #include <cuda_runtime.h>
 
 // Wrapper function for cudaFree
-void cudaFreeWrapper(void* ptr) noexcept {
+void releaseBuffer(void* ptr) noexcept {
     // Can't do this due to `noexcept`
     // cudaError_t error = cudaFree(ptr);
     // if (error != cudaSuccess) {
