@@ -20,8 +20,8 @@ manager.
 Testing
 -------
 
-Afterward, you should be able to run the test suite, which profiles Torch MPS
-against raw Metal with nanobind and Torch CPU.
+Afterward, you should be able to run the test suite, which profiles the Torch GPU backend (MPS or CUDA)
+against raw Metal or CUDA via nanobind and Torch CPU.
 
 ```bash
 % uv run pytest -vs
