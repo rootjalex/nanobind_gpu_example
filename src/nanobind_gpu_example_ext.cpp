@@ -37,6 +37,10 @@ NB_MODULE(nanobind_gpu_example_ext, m) {
            GPUVector<float>& out) {
             check_same_length("b", a.shape(0), b.shape(0));
             check_same_length("out", a.shape(0), out.shape(0));
+            // Empty tensors have no buffer
+            if (a.shape(0) == 0) {
+                return;
+            }
             vecf_add_out(a, b, out);
         },
         // out can't be converted, the result would go to a temporary copy

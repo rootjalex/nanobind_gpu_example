@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <stdexcept>
 
 #include "metal_impl.h"
 #include "nb_utils.h"
@@ -129,6 +130,5 @@ MTL::Buffer* get_mtl_buffer(const GPUVector<T>& gpu_vec) {
     if (ptr) {
         return ptr;
     }
-    std::cerr << "Failed to get mtl buffer from ndarray" << std::endl;
-    exit(-1);
+    throw std::runtime_error("Failed to get mtl buffer from ndarray");
 }
