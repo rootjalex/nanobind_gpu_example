@@ -166,10 +166,9 @@ def test_length_mismatch_is_rejected(
             nanobind_gpu_example.vecf_add(a, b)
 
 
-def test_conversion_is_rejected(device_type: str):
-    """Tensors that nanobind would have to copy should be rejected."""
+def test_out_is_never_converted(device_type: str):
+    """vecf_add_out should reject an out tensor that nanobind would copy."""
     x = torch.ones(8, dtype=torch.float32, device=device_type)
-    out = torch.zeros(8, dtype=torch.float32, device=device_type)
 
     unsupported = {
         "wrong dtype": torch.zeros(8, dtype=torch.float16, device=device_type),
@@ -182,7 +181,28 @@ def test_conversion_is_rejected(device_type: str):
             nanobind_gpu_example.vecf_add_out(x, x, bad)
         assert not bad.any(), f"out ({label}) should not be modified"
 
-        with pytest.raises(TypeError):
-            nanobind_gpu_example.vecf_add_out(bad, x, out)
-        with pytest.raises(TypeError):
-            nanobind_gpu_example.vecf_add(x, bad)
+
+def test_inputs_may_be_converted(device_type: str):
+    """Inputs with a different dtype or stride get converted."""
+    x = torch.arange(8, dtype=torch.float32, device=device_type)
+    out = torch.zeros(8, dtype=torch.float32, device=device_type)
+    expected = x + x
+
+    half = x.to(torch.float16)
+    strided = torch.arange(0, 8, 0.5, dtype=torch.float32, device=device_type)[::2]
+    for a in (half, strided):
+        out.zero_()
+        # Torch must finish writing the tensors first (important on MPS)
+        get_torch_sync(device_type)()
+        nanobind_gpu_example.vecf_add_out(a, x, out)
+        nanobind_gpu_example.synchronize()
+        assert torch.equal(out, expected)
+
+        r = nanobind_gpu_example.vecf_add(x, a)
+        nanobind_gpu_example.synchronize()
+        assert r.dtype == torch.float32
+        assert torch.equal(r, expected)
+
+    # Tensors on another device are not converted
+    with pytest.raises(TypeError):
+        nanobind_gpu_example.vecf_add(x, x.to("cpu"))
