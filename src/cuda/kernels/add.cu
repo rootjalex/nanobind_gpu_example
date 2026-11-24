@@ -4,6 +4,7 @@
 #include <stdexcept>
 
 #include "add.h"
+#include "pool.h"
 #include "utils.h"
 
 template <typename value_t, typename index_t>
@@ -19,15 +20,9 @@ __global__ void add_kernel(value_t* __restrict__ r,
 }
 
 float* gpu_add_f32(const float* x, const float* y, const uint64_t n) {
-    float* result = nullptr;
-    CHECK_CUDA(cudaMalloc(&result, n * sizeof(float)));
-    try {
-        gpu_add_out_f32(x, y, result, n);
-    } catch (...) {
-        cudaFree(result);
-        throw;
-    }
-    return result;
+    Buffer<float> result(n);
+    gpu_add_out_f32(x, y, result.ptr, n);
+    return result.release();
 }
 
 void gpu_add_out_f32(const float* x, const float* y, float* result,

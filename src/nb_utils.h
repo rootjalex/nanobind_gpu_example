@@ -21,7 +21,11 @@ using GPUVector =
 
 template <typename T>
 GPUVector<T> make_gpu_vector(T* ptr, const size_t n) {
-    nb::capsule owner(ptr, releaseBuffer);
+    // An empty vector has no buffer to release
+    nb::object owner;
+    if (ptr) {
+        owner = nb::capsule(ptr, releaseBuffer);
+    }
 
     const size_t shape[1] = {n};
 
