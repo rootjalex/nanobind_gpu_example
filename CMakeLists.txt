@@ -16,7 +16,7 @@ endif ()
 
 set(GPU_BACKEND "${GPU_BACKEND}" CACHE STRING "GPU backend to use (cuda or metal)")
 
-if (NOT GPU_BACKEND MATCHES "^cuda|metal$")
+if (NOT GPU_BACKEND MATCHES "^(cuda|metal)$")
     message(FATAL_ERROR "Unsupported GPU_BACKEND: ${GPU_BACKEND}. Supported backends are 'cuda' and 'metal'.")
 endif ()
 
@@ -34,7 +34,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 # Try to import all Python components potentially needed by nanobind
 find_package(
-    Python 3.8
+    Python 3.11
     REQUIRED COMPONENTS Interpreter Development.Module
     OPTIONAL_COMPONENTS Development.SABIModule
 )

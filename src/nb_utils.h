@@ -15,17 +15,11 @@ using gpu_device = nb::device::metal;
 #error "Cannot compile without METAL or CUDA"
 #endif
 
-#include <iostream>
-
 template <typename T>
 using GPUVector =
     nb::ndarray<nb::pytorch, T, nb::shape<-1>, nb::c_contig, gpu_device>;
 
 template <typename T>
-using CPUVector =
-    nb::ndarray<nb::pytorch, T, nb::shape<-1>, nb::c_contig, nb::device::cpu>;
-
-template<typename T>
 GPUVector<T> make_gpu_vector(T* ptr, const size_t n) {
     nb::capsule owner(ptr, releaseBuffer);
 

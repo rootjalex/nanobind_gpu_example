@@ -4,7 +4,6 @@ target_sources(
     nanobind_gpu_example_ext
     PRIVATE
     add.cpp
-    add.h
     metal_impl.cpp
     metal_impl.h
     utils.cpp

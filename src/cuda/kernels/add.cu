@@ -1,51 +1,61 @@
 #include <cuda_runtime.h>
 
-#include <iostream>
-#include <sstream>
+#include <climits>
+#include <stdexcept>
 
 #include "add.h"
 #include "utils.h"
 
-template<typename value_t, typename size_t>
-__global__ void add_kernel(value_t *__restrict__ r, const value_t *__restrict__ a, const value_t *__restrict__ b, const size_t n) {
-    const int i = blockIdx.x * blockDim.x + threadIdx.x;
+template <typename value_t, typename index_t>
+__global__ void add_kernel(value_t* __restrict__ r,
+                           const value_t* __restrict__ a,
+                           const value_t* __restrict__ b, const index_t n) {
+    // i must be 64-bit, n can exceed INT_MAX
+    const index_t i =
+        static_cast<index_t>(blockIdx.x) * blockDim.x + threadIdx.x;
     if (i < n) {
         r[i] = a[i] + b[i];
     }
 }
 
-float *gpu_add_f32(const float *x, const float *y, const uint64_t n) {
-    float *result;
-    CHECK_CUDA( cudaMalloc(&result, n * sizeof(float)) );
-    gpu_add_out_f32(x, y, result, n);
+float* gpu_add_f32(const float* x, const float* y, const uint64_t n) {
+    float* result = nullptr;
+    CHECK_CUDA(cudaMalloc(&result, n * sizeof(float)));
+    try {
+        gpu_add_out_f32(x, y, result, n);
+    } catch (...) {
+        cudaFree(result);
+        throw;
+    }
     return result;
 }
 
-void gpu_add_out_f32(const float *x, const float *y, float *result, const uint64_t n) {
-    // Get device properties
+void gpu_add_out_f32(const float* x, const float* y, float* result,
+                     const uint64_t n) {
+    if (n == 0) {
+        return;
+    }
+
     static int blockSize = -1;
     if (blockSize == -1) {
         // Only run the first call
-        // Get device properties
-        int device;
-        CHECK_CUDA(cudaGetDevice(&device));
-
-        cudaDeviceProp prop;
-        cudaGetDeviceProperties(&prop, device);
-
         // Get a good launch config based on occupancy
         int minGridSize = 0;
+        int occupancyBlockSize = 0;
+        const size_t dynamicSharedMemPerBlock = 0;
         CHECK_CUDA(cudaOccupancyMaxPotentialBlockSize(
-            &minGridSize,
-            &blockSize,
-            add_kernel<float, uint64_t>,
-            0           // dynamic shared memory per block
-        ));
+            &minGridSize, &occupancyBlockSize, add_kernel<float, uint64_t>,
+            dynamicSharedMemPerBlock));
+        blockSize = occupancyBlockSize;
     }
-    int gridSize = (n + blockSize - 1) / blockSize;
 
-    add_kernel<float, uint64_t><<<gridSize, blockSize>>>(result, x, y, n);
+    const uint64_t gridSize = (n + blockSize - 1) / blockSize;
+    if (gridSize > INT_MAX) {
+        throw std::length_error("Failed to launch kernel, vector is too long");
+    }
 
-    CHECK_CUDA( cudaGetLastError() );
+    add_kernel<float, uint64_t>
+        <<<static_cast<unsigned int>(gridSize), blockSize>>>(result, x, y, n);
+
+    CHECK_CUDA(cudaGetLastError());
 }
-

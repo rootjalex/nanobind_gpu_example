@@ -1,6 +1,7 @@
 target_sources(
     nanobind_gpu_example_ext
     PRIVATE
+    backend.h
     nanobind_gpu_example_ext.cpp
     nb_utils.h
 )

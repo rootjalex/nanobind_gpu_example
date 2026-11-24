@@ -1,5 +1,5 @@
 nanobind_gpu_example
-================
+====================
 
 This repository contains a tiny project showing how to create C++ bindings
 using [nanobind] and [scikit-build-core], that use GPU (currently Metal or CUDA)
@@ -15,74 +15,108 @@ manager.
 1. Clone this repository; `cd nanobind_gpu_example`
 2. If running on Apple Silicon, copy [metal-cpp] into the root of this project
    directory.
-3. Run `uv sync`
+3. If running on Linux, make sure the CUDA toolkit is installed and `nvcc` is
+   on your `PATH` (or set `CUDACXX` to the path of `nvcc`).
+4. Run `uv sync`
+
+CMake selects the Metal backend on macOS and the CUDA backend on other
+platforms. Set the `GPU_BACKEND` CMake option to `cuda` or `metal` to select a
+backend manually.
+
+After changing any file in `src`, run `uv sync` again to rebuild the extension.
+
+Synchronization
+---------------
+
+On Metal, call `torch.mps.synchronize()` before passing tensors to the
+extension, and `nanobind_gpu_example.synchronize()` before using the results in
+Torch. The extension has its own Metal command queue, separate from Torch's.
+
+On CUDA, Torch and the extension both use the default stream. If you run Torch
+on another stream, call `torch.cuda.synchronize()` before passing tensors to the
+extension, and `nanobind_gpu_example.synchronize()` before using the results in
+Torch.
+
+The extension raises a `TypeError` for tensors with the wrong dtype, layout, or
+device instead of converting them.
 
 Testing
 -------
 
 Afterward, you should be able to run the test suite, which profiles the Torch GPU backend (MPS or CUDA)
-against raw Metal or CUDA via nanobind and Torch CPU.
+against raw Metal or CUDA via nanobind and Torch CPU. The largest test needs
+16 GB of free GPU memory, and is skipped on CUDA GPUs with less free memory.
 
 ```bash
 % uv run pytest -vs
-============================= test session starts =============================
-platform darwin -- Python 3.13.9, pytest-8.4.2, pluggy-1.6.0 -- /path/to/nanobind_gpu_example/.venv/bin/python3
+============================= test session starts ==============================
+platform linux -- Python 3.13.13, pytest-9.2.0, pluggy-1.7.0 -- /path/to/nanobind_gpu_example/.venv/bin/python
 cachedir: .pytest_cache
 rootdir: /path/to/nanobind_gpu_example
 configfile: pyproject.toml
-collected 8 items                                                                                                                                                                                               
+testpaths: tests
+collected 18 items
 
 tests/test_basic.py::test_gpu_add[100] 
-Using Apple Metal (MPS) backend.
+Using NVIDIA CUDA backend.
 
-Torch mps: 0.184 ms
-nanobind mps: 0.215 ms
-Torch CPU: 0.000 ms
+Torch cuda: 0.006 ms
+nanobind cuda: 0.009 ms
+Torch CPU: 0.001 ms
 PASSED
 tests/test_basic.py::test_gpu_add[1000] 
-Torch mps: 0.177 ms
-nanobind mps: 0.180 ms
+Torch cuda: 0.006 ms
+nanobind cuda: 0.009 ms
 Torch CPU: 0.001 ms
 PASSED
 tests/test_basic.py::test_gpu_add[10000] 
-Torch mps: 0.180 ms
-nanobind mps: 0.188 ms
+Torch cuda: 0.006 ms
+nanobind cuda: 0.009 ms
 Torch CPU: 0.001 ms
 PASSED
 tests/test_basic.py::test_gpu_add[100000] 
-Torch mps: 0.188 ms
-nanobind mps: 0.208 ms
-Torch CPU: 0.042 ms
+Torch cuda: 0.006 ms
+nanobind cuda: 0.009 ms
+Torch CPU: 0.005 ms
 PASSED
 tests/test_basic.py::test_gpu_add[1000000] 
-Torch mps: 0.201 ms
-nanobind mps: 0.237 ms
-Torch CPU: 0.064 ms
+Torch cuda: 0.009 ms
+nanobind cuda: 0.011 ms
+Torch CPU: 0.015 ms
 PASSED
 tests/test_basic.py::test_gpu_add[10000000] 
-Torch mps: 0.581 ms
-nanobind mps: 0.532 ms
-Torch CPU: 0.670 ms
+Torch cuda: 0.059 ms
+nanobind cuda: 0.063 ms
+Torch CPU: 0.955 ms
 PASSED
 tests/test_basic.py::test_gpu_add[100000000] 
-Torch mps: 3.603 ms
-nanobind mps: 3.595 ms
-Torch CPU: 6.469 ms
+Torch cuda: 0.765 ms
+nanobind cuda: 0.770 ms
+Torch CPU: 36.002 ms
 PASSED
 tests/test_basic.py::test_gpu_add[1000000000] 
-Torch mps: 34.597 ms
-nanobind mps: 34.160 ms
-Torch CPU: 63.671 ms
+Torch cuda: 7.620 ms
+nanobind cuda: 7.612 ms
+Torch CPU: 375.757 ms
 PASSED
+tests/test_basic.py::test_gpu_add_allocating[1] PASSED
+tests/test_basic.py::test_gpu_add_allocating[1000] PASSED
+tests/test_basic.py::test_gpu_add_allocating[1000000] PASSED
+tests/test_basic.py::test_gpu_add_empty PASSED
+tests/test_basic.py::test_gpu_add_past_int32_index PASSED
+tests/test_basic.py::test_length_mismatch_is_rejected[100-10-100] PASSED
+tests/test_basic.py::test_length_mismatch_is_rejected[10-100-100] PASSED
+tests/test_basic.py::test_length_mismatch_is_rejected[100-100-10] PASSED
+tests/test_basic.py::test_length_mismatch_is_rejected[100-100-1000] PASSED
+tests/test_basic.py::test_conversion_is_rejected PASSED
 
-============================== 8 passed in 9.71s ==============================
+============================= 18 passed in 13.37s ==============================
 ```
 
 License
 -------
 
-I kept the original [LICENSE](./LICENSE) file from Wenzel's example because I
-don't really understand how licenses work and I don't want to get in trouble.
+This project uses the BSD 3-Clause [LICENSE](./LICENSE) from Wenzel's example.
 
 [@wjakob]: https://github.com/wjakob
 
