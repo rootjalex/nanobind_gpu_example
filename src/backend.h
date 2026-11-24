@@ -13,3 +13,8 @@ void vecf_add_out(const GPUVector<float>& a, const GPUVector<float>& b,
 
 // Waits for all GPU work to finish
 void synchronize();
+
+#if defined(USE_CUDA)
+// Adds the SpMSpV functions to the module (CUDA only)
+void bind_spmspv(nb::module_& m);
+#endif

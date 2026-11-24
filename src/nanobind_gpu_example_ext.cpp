@@ -50,4 +50,8 @@ NB_MODULE(nanobind_gpu_example_ext, m) {
         "Writes result into a preallocated buffer");
 
     m.def("synchronize", synchronize, "Waits for all GPU work to finish");
+
+#if defined(USE_CUDA)
+    bind_spmspv(m);
+#endif
 }

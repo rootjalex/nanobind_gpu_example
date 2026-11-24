@@ -23,9 +23,11 @@ Homepage = "https://github.com/rootjalex/nanobind_gpu_example"
 [dependency-groups]
 dev = [
     "cmake>=4.0",
+    "matplotlib",
     "nanobind>=2.0",
     "numpy",
     "pytest>=8.3.5",
+    "scipy",
 ]
 
 [tool.scikit-build]
