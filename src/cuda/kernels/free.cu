@@ -1,13 +1,9 @@
-#include "utils.h"
-
 #include <cuda_runtime.h>
 
-// Wrapper function for cudaFree
+#include "free.h"
+
 void releaseBuffer(void* ptr) noexcept {
-    // Can't do this due to `noexcept`
-    // cudaError_t error = cudaFree(ptr);
-    // if (error != cudaSuccess) {
-    //     throw std::runtime_error(cudaGetErrorString(error));
-    // }
+    // Runs from a capsule destructor, so it must not throw: a failed free is
+    // deliberately ignored.
     cudaFree(ptr);
 }

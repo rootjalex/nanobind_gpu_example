@@ -4,8 +4,6 @@ target_sources(
     nanobind_gpu_example_ext
     PRIVATE
     add.cpp
-    add.h
-    utils.h
     kernels/add.cu
     kernels/add.h
     kernels/free.cu

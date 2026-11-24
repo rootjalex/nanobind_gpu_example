@@ -2,18 +2,16 @@
 
 #include <cuda_runtime.h>
 
-#define CHECK_CUDA(func)                                                       \
-{                                                                              \
-    cudaError_t status = (func);                                               \
-    if (status != cudaSuccess) {                                               \
-        throw std::runtime_error(cudaGetErrorString(status));                  \
-    }                                                                          \
-}
+#include <stdexcept>
 
-#define CHECK_CUSPARSE(func)                                                   \
-{                                                                              \
-    cusparseStatus_t status = (func);                                          \
-    if (status != CUSPARSE_STATUS_SUCCESS) {                                   \
-        throw std::runtime_error(cusparseGetErrorString(status));              \
-    }                                                                          \
-}
+#define CHECK_CUDA(func)                                                      \
+    do {                                                                      \
+        const cudaError_t check_cuda_status_ = (func);                        \
+        if (check_cuda_status_ != cudaSuccess) {                              \
+            throw std::runtime_error(cudaGetErrorString(check_cuda_status_)); \
+        }                                                                     \
+    } while (false)
+
+// Blocks until all GPU work submitted so far has finished, and reports any
+// error raised by that work.
+void synchronize();

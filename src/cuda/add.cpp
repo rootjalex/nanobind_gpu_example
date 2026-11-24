@@ -1,9 +1,11 @@
-#include "add.h"
 #include "kernels/add.h"
 
-GPUVector<float> vecf_add(const GPUVector<float>& a, const GPUVector<float>& b) {
+#include "backend.h"
+
+GPUVector<float> vecf_add(const GPUVector<float>& a,
+                          const GPUVector<float>& b) {
     const uint64_t n = a.shape(0);
-    float *result = gpu_add_f32(a.data(), b.data(), n);
+    float* result = gpu_add_f32(a.data(), b.data(), n);
     return make_gpu_vector(result, n);
 }
 
