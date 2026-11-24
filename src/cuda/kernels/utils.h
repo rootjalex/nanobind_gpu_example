@@ -12,6 +12,5 @@
         }                                                                     \
     } while (false)
 
-// Blocks until all GPU work submitted so far has finished, and reports any
-// error raised by that work.
+// Waits for all GPU work to finish
 void synchronize();

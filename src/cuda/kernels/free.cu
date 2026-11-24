@@ -2,8 +2,8 @@
 
 #include "free.h"
 
+// Wrapper function for cudaFree
 void releaseBuffer(void* ptr) noexcept {
-    // Runs from a capsule destructor, so it must not throw: a failed free is
-    // deliberately ignored.
+    // Can't throw on failure due to `noexcept`
     cudaFree(ptr);
 }

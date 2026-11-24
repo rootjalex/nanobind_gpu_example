@@ -1,6 +1,6 @@
 #include "utils.h"
 
 void synchronize() {
-    // Errors from asynchronous kernel launches surface here.
+    // cudaDeviceSynchronize reports kernel errors
     CHECK_CUDA(cudaDeviceSynchronize());
 }

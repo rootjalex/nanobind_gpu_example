@@ -31,22 +31,19 @@ def get_torch_sync(device_type: str):
 
 
 def require_gpu_memory(device_type: str, n_bytes: int) -> None:
-    """Skip the current test if the GPU is known to be too small for it."""
+    """Skip if the GPU does not have enough free memory."""
     if device_type != "cuda":
-        # MPS shares memory with the host and has no cheap, reliable query
+        # No reliable way to check free memory on MPS
         return
-    # Hand memory cached by earlier tests back to the driver so it is counted
+    # Release memory cached by earlier tests
     torch.cuda.empty_cache()
     free_bytes, _ = torch.cuda.mem_get_info()
     if free_bytes < n_bytes:
-        pytest.skip(
-            f"needs {n_bytes / 2**30:.1f} GiB of GPU memory, "
-            f"only {free_bytes / 2**30:.1f} GiB free"
-        )
+        pytest.skip(f"Not enough free GPU memory (need {n_bytes / 2**30:.1f} GiB).")
 
 
 def bench_ms(fn, sync=lambda: None) -> float:
-    """Average time of fn() in ms, after a warmup, without the two outliers."""
+    """Average time of fn() in ms."""
     # Warmup (important to trigger GPU pipeline compilation)
     for _ in range(ITERS):
         fn()
@@ -67,7 +64,7 @@ def bench_ms(fn, sync=lambda: None) -> float:
 
 @pytest.mark.parametrize("n", [10**i for i in range(2, 10)])
 def test_gpu_add(n: int, device_type: str):
-    # Four float32 vectors live on the GPU at once (and four more on the CPU)
+    # 4 float32 vectors on the GPU
     require_gpu_memory(device_type, 4 * 4 * n)
     print()
 
@@ -131,9 +128,9 @@ def test_gpu_add_empty(device_type: str):
 
 
 def test_gpu_add_past_int32_index(device_type: str):
-    """Elements at index >= 2**31 used to be skipped by the CUDA kernel."""
+    """Check elements past INT_MAX get written."""
     if device_type != "cuda":
-        pytest.skip("regression test for the CUDA kernel's index type")
+        pytest.skip("CUDA only")
     n = 2**31 + 1000
     require_gpu_memory(device_type, 3 * 4 * n)
 
@@ -160,7 +157,7 @@ def test_length_mismatch_is_rejected(
 
     with pytest.raises(ValueError, match="has length"):
         nanobind_gpu_example.vecf_add_out(a, b, out)
-    assert not out.any(), "out must be left untouched"
+    assert not out.any(), "out should not be modified"
 
     if len_a != len_b:
         with pytest.raises(ValueError, match="has length"):
@@ -168,10 +165,7 @@ def test_length_mismatch_is_rejected(
 
 
 def test_out_is_never_converted(device_type: str):
-    """An `out` tensor that would need a converting copy must be rejected.
-
-    Otherwise the result is written to a temporary and silently discarded.
-    """
+    """vecf_add_out should reject an out tensor that nanobind would copy."""
     x = torch.ones(8, dtype=torch.float32, device=device_type)
 
     unsupported = {
@@ -183,11 +177,11 @@ def test_out_is_never_converted(device_type: str):
     for label, bad in unsupported.items():
         with pytest.raises(TypeError):
             nanobind_gpu_example.vecf_add_out(x, x, bad)
-        assert not bad.any(), f"{label}: out must be left untouched"
+        assert not bad.any(), f"out ({label}) should not be modified"
 
 
 def test_inputs_may_be_converted(device_type: str):
-    """Inputs with another dtype or layout are converted, not rejected."""
+    """Inputs with a different dtype or stride get converted."""
     x = torch.arange(8, dtype=torch.float32, device=device_type)
     out = torch.zeros(8, dtype=torch.float32, device=device_type)
     expected = x + x
@@ -205,6 +199,6 @@ def test_inputs_may_be_converted(device_type: str):
         assert r.dtype == torch.float32
         assert torch.equal(r, expected)
 
-    # Conversion never crosses devices
+    # Tensors on another device are not converted
     with pytest.raises(TypeError):
         nanobind_gpu_example.vecf_add(x, x.to("cpu"))

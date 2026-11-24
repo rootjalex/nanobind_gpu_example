@@ -2,16 +2,14 @@
 
 #include "nb_utils.h"
 
-// The interface every GPU backend (src/cuda, src/metal) implements. Argument
-// validation happens once, in the binding layer, so backends may assume that
-// all vectors passed to them have the same length.
+// Functions implemented by each backend (cuda or metal)
 
-// Allocates and returns a new buffer holding a + b.
+// Allocates and returns a new buffer
 GPUVector<float> vecf_add(const GPUVector<float>& a, const GPUVector<float>& b);
 
-// Writes a + b into a preallocated buffer.
+// Writes result into a preallocated buffer
 void vecf_add_out(const GPUVector<float>& a, const GPUVector<float>& b,
                   GPUVector<float>& out);
 
-// Blocks until all GPU work submitted so far has finished.
+// Waits for all GPU work to finish
 void synchronize();

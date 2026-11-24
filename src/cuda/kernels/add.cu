@@ -10,8 +10,7 @@ template <typename value_t, typename index_t>
 __global__ void add_kernel(value_t* __restrict__ r,
                            const value_t* __restrict__ a,
                            const value_t* __restrict__ b, const index_t n) {
-    // Widen before multiplying: a 32-bit index stops covering the input once
-    // n exceeds INT_MAX.
+    // i must be 64-bit, n can exceed INT_MAX
     const index_t i =
         static_cast<index_t>(blockIdx.x) * blockDim.x + threadIdx.x;
     if (i < n) {
@@ -37,9 +36,9 @@ void gpu_add_out_f32(const float* x, const float* y, float* result,
         return;
     }
 
-    // The launch config only depends on the kernel, so compute it once.
     static int blockSize = -1;
     if (blockSize == -1) {
+        // Only run the first call
         // Get a good launch config based on occupancy
         int minGridSize = 0;
         int occupancyBlockSize = 0;
@@ -52,7 +51,7 @@ void gpu_add_out_f32(const float* x, const float* y, float* result,
 
     const uint64_t gridSize = (n + blockSize - 1) / blockSize;
     if (gridSize > INT_MAX) {
-        throw std::length_error("vector is too long for a 1-D kernel launch");
+        throw std::length_error("Failed to launch kernel, vector is too long");
     }
 
     add_kernel<float, uint64_t>

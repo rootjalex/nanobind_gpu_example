@@ -6,15 +6,6 @@ using [nanobind] and [scikit-build-core], that use GPU (currently Metal or CUDA)
 compute shaders. It was derived from the original [nanobind example project]
 developed by [@wjakob].
 
-Requirements
-------------
-
-- Python 3.11 or newer
-- **Linux / CUDA:** the CUDA toolkit, with `nvcc` on your `PATH` (or pointed
-  to by the `CUDACXX` environment variable, e.g.
-  `CUDACXX=/usr/local/cuda/bin/nvcc`)
-- **Apple Silicon / Metal:** a copy of [metal-cpp] (see below)
-
 Installation
 ------------
 
@@ -24,24 +15,22 @@ manager.
 1. Clone this repository; `cd nanobind_gpu_example`
 2. If running on Apple Silicon, copy [metal-cpp] into the root of this project
    directory.
-3. Run `uv sync`
+3. If running on Linux, make sure the CUDA toolkit is installed and `nvcc` is
+   on your `PATH` (or set `CUDACXX` to the path of `nvcc`).
+4. Run `uv sync`
 
-The GPU backend is chosen automatically: Metal on macOS and CUDA everywhere
-else. To pick one explicitly, set the `GPU_BACKEND` CMake option to `cuda` or
-`metal`, e.g. `SKBUILD_CMAKE_DEFINE="GPU_BACKEND=cuda" uv sync`.
+CMake selects the Metal backend on macOS and the CUDA backend on other
+platforms. Set the `GPU_BACKEND` CMake option to `cuda` or `metal` to select a
+backend manually.
 
-`uv sync` and `uv run` rebuild the extension whenever a file under `src/` or a
-CMake file changes.
+After changing any file in `src`, run `uv sync` again to rebuild the extension.
 
 Testing
 -------
 
 Afterward, you should be able to run the test suite, which profiles the Torch GPU backend (MPS or CUDA)
-against raw Metal or CUDA via nanobind and Torch CPU. The largest benchmark
-adds vectors of 10^9 floats, which takes 16 GB of GPU memory; on CUDA it is
-skipped when the GPU does not have that much free.
-
-The output below is from an NVIDIA RTX 5090 with CUDA 13.2.
+against raw Metal or CUDA via nanobind and Torch CPU. The largest test needs
+16 GB of free GPU memory, and is skipped on CUDA GPUs with less free memory.
 
 ```bash
 % uv run pytest -vs
@@ -113,9 +102,7 @@ tests/test_basic.py::test_inputs_may_be_converted PASSED
 License
 -------
 
-This project is released under the BSD 3-Clause license; see
-[LICENSE](./LICENSE). It is derived from Wenzel Jakob's
-[nanobind example project], whose copyright notice is retained there.
+This project uses the BSD 3-Clause [LICENSE](./LICENSE) from Wenzel's example.
 
 [@wjakob]: https://github.com/wjakob
 

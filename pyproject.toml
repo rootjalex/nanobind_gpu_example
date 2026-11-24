@@ -5,7 +5,7 @@ build-backend = "scikit_build_core.build"
 [project]
 name = "nanobind-gpu-example"
 version = "0.0.1"
-description = "A minimal example of GPU (CUDA or Metal) bindings built with nanobind and scikit-build-core"
+description = "An example minimal project that compiles GPU bindings using nanobind and scikit-build"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "BSD-3-Clause"
@@ -14,7 +14,6 @@ authors = [
     { name = "Alexander J Root", email = "ajroot@cs.stanford.edu" },
 ]
 dependencies = [
-    # Arguments and return values are exchanged as PyTorch tensors
     "torch",
 ]
 
@@ -42,8 +41,7 @@ build-dir = "build/{wheel_tag}"
 wheel.py-api = "cp312"
 
 [tool.uv]
-# Rebuild the extension on `uv sync` / `uv run` whenever the native sources or
-# the build configuration change (by default uv only watches pyproject.toml)
+# Rebuild the extension when native sources change
 cache-keys = [
     { file = "pyproject.toml" },
     { file = "CMakeLists.txt" },

@@ -29,7 +29,7 @@ NB_MODULE(nanobind_gpu_example_ext, m) {
             check_same_length("b", a.shape(0), b.shape(0));
             return vecf_add(a, b);
         },
-        "a"_a, "b"_a, "Return a new float32 GPU tensor holding a + b.");
+        "a"_a, "b"_a, "Allocates and returns a new buffer");
 
     m.def(
         "vecf_add_out",
@@ -39,11 +39,9 @@ NB_MODULE(nanobind_gpu_example_ext, m) {
             check_same_length("out", a.shape(0), out.shape(0));
             vecf_add_out(a, b, out);
         },
-        // `out` must not be implicitly converted: nanobind would hand us a
-        // temporary copy, and the result written to it would be silently lost.
+        // out can't be converted, the result would go to a temporary copy
         "a"_a, "b"_a, "out"_a.noconvert(),
-        "Write a + b into the preallocated float32 GPU tensor out.");
+        "Writes result into a preallocated buffer");
 
-    m.def("synchronize", synchronize,
-          "Block until all GPU work submitted so far has finished.");
+    m.def("synchronize", synchronize, "Waits for all GPU work to finish");
 }
