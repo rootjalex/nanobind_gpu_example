@@ -25,6 +25,21 @@ backend manually.
 
 After changing any file in `src`, run `uv sync` again to rebuild the extension.
 
+Synchronization
+---------------
+
+On Metal, call `torch.mps.synchronize()` before passing tensors to the
+extension, and `nanobind_gpu_example.synchronize()` before using the results in
+Torch. The extension has its own Metal command queue, separate from Torch's.
+
+On CUDA, Torch and the extension both use the default stream. If you run Torch
+on another stream, call `torch.cuda.synchronize()` before passing tensors to the
+extension, and `nanobind_gpu_example.synchronize()` before using the results in
+Torch.
+
+The extension raises a `TypeError` for tensors with the wrong dtype, layout, or
+device instead of converting them.
+
 Testing
 -------
 
@@ -40,7 +55,7 @@ cachedir: .pytest_cache
 rootdir: /path/to/nanobind_gpu_example
 configfile: pyproject.toml
 testpaths: tests
-collected 19 items
+collected 18 items
 
 tests/test_basic.py::test_gpu_add[100] 
 Using NVIDIA CUDA backend.
@@ -65,24 +80,24 @@ nanobind cuda: 0.009 ms
 Torch CPU: 0.005 ms
 PASSED
 tests/test_basic.py::test_gpu_add[1000000] 
-Torch cuda: 0.008 ms
+Torch cuda: 0.009 ms
 nanobind cuda: 0.011 ms
-Torch CPU: 0.010 ms
+Torch CPU: 0.015 ms
 PASSED
 tests/test_basic.py::test_gpu_add[10000000] 
 Torch cuda: 0.059 ms
 nanobind cuda: 0.063 ms
-Torch CPU: 0.950 ms
+Torch CPU: 0.955 ms
 PASSED
 tests/test_basic.py::test_gpu_add[100000000] 
-Torch cuda: 0.766 ms
+Torch cuda: 0.765 ms
 nanobind cuda: 0.770 ms
-Torch CPU: 36.088 ms
+Torch CPU: 36.002 ms
 PASSED
 tests/test_basic.py::test_gpu_add[1000000000] 
-Torch cuda: 7.622 ms
-nanobind cuda: 7.605 ms
-Torch CPU: 379.274 ms
+Torch cuda: 7.620 ms
+nanobind cuda: 7.612 ms
+Torch CPU: 375.757 ms
 PASSED
 tests/test_basic.py::test_gpu_add_allocating[1] PASSED
 tests/test_basic.py::test_gpu_add_allocating[1000] PASSED
@@ -93,10 +108,9 @@ tests/test_basic.py::test_length_mismatch_is_rejected[100-10-100] PASSED
 tests/test_basic.py::test_length_mismatch_is_rejected[10-100-100] PASSED
 tests/test_basic.py::test_length_mismatch_is_rejected[100-100-10] PASSED
 tests/test_basic.py::test_length_mismatch_is_rejected[100-100-1000] PASSED
-tests/test_basic.py::test_out_is_never_converted PASSED
-tests/test_basic.py::test_inputs_may_be_converted PASSED
+tests/test_basic.py::test_conversion_is_rejected PASSED
 
-============================= 19 passed in 12.57s ==============================
+============================= 18 passed in 13.37s ==============================
 ```
 
 License

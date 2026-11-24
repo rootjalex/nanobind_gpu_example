@@ -23,13 +23,16 @@ void check_same_length(const char* what, const size_t expected,
 NB_MODULE(nanobind_gpu_example_ext, m) {
     m.doc() = "This is a \"hello world\" example with nanobind on GPU";
 
+    // No conversions. A converted out is a temporary copy, and torch may not
+    // have written a converted a or b before the kernel runs (e.g., on MPS).
     m.def(
         "vecf_add",
         [](const GPUVector<float>& a, const GPUVector<float>& b) {
             check_same_length("b", a.shape(0), b.shape(0));
             return vecf_add(a, b);
         },
-        "a"_a, "b"_a, "Allocates and returns a new buffer");
+        "a"_a.noconvert(), "b"_a.noconvert(),
+        "Allocates and returns a new buffer");
 
     m.def(
         "vecf_add_out",
@@ -43,8 +46,7 @@ NB_MODULE(nanobind_gpu_example_ext, m) {
             }
             vecf_add_out(a, b, out);
         },
-        // noconvert, otherwise the result may be written to a copy of out
-        "a"_a, "b"_a, "out"_a.noconvert(),
+        "a"_a.noconvert(), "b"_a.noconvert(), "out"_a.noconvert(),
         "Writes result into a preallocated buffer");
 
     m.def("synchronize", synchronize, "Waits for all GPU work to finish");
