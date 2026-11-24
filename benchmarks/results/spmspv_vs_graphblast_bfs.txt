@@ -1,0 +1,14 @@
+inputs: 913
+excluded (a series failed): 5
+products: min 1, median 59779, max 36661886
+
+runtime in ms
+  ESC: geo-mean 0.084, min 0.042, median 0.085, max 2.264
+  GraphBLAST: geo-mean 0.086, min 0.053, median 0.082, max 2.455
+
+fastest
+  ESC: 472 (51.7%)
+  GraphBLAST: 441 (48.3%)
+
+speedup of ESC over GraphBLAST
+  geo-mean 1.022, min 0.800, median 1.007, max 1.394

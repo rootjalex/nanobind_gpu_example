@@ -1,0 +1,14 @@
+inputs: 327
+excluded (a series failed): 0
+products: min 647, median 4327, max 774777
+
+runtime in ms
+  Dense: geo-mean 0.048, min 0.040, median 0.044, max 0.235
+  cuSPARSE: geo-mean 0.141, min 0.100, median 0.109, max 3.331
+
+fastest
+  Dense: 327 (100.0%)
+  cuSPARSE: 0 (0.0%)
+
+speedup of Dense over cuSPARSE
+  geo-mean 2.919, min 1.721, median 2.579, max 19.716

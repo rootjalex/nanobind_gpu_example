@@ -1,0 +1,14 @@
+inputs: 327
+excluded (a series failed): 0
+products: min 647, median 4327, max 774777
+
+runtime in ms
+  ESC: geo-mean 0.060, min 0.040, median 0.060, max 0.116
+  cuSPARSE: geo-mean 0.141, min 0.100, median 0.109, max 3.331
+
+fastest
+  ESC: 327 (100.0%)
+  cuSPARSE: 0 (0.0%)
+
+speedup of ESC over cuSPARSE
+  geo-mean 2.331, min 1.287, median 2.193, max 28.617

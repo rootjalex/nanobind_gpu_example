@@ -1,0 +1,14 @@
+inputs: 327
+excluded (a series failed): 0
+products: min 647, median 4327, max 774777
+
+runtime in ms
+  ESC (min bits): geo-mean 0.060, min 0.040, median 0.060, max 0.116
+  ESC (32 bits): geo-mean 0.069, min 0.050, median 0.061, max 0.117
+
+fastest
+  ESC (min bits): 312 (95.4%)
+  ESC (32 bits): 15 (4.6%)
+
+speedup of ESC (min bits) over ESC (32 bits)
+  geo-mean 1.143, min 0.781, median 1.166, max 1.531

@@ -1,0 +1,14 @@
+inputs: 327
+excluded (a series failed): 0
+products: min 6541, median 43863, max 7746840
+
+runtime in ms
+  Best of dense, ESC, hash: geo-mean 0.055, min 0.041, median 0.053, max 0.519
+  cuSPARSE: geo-mean 0.342, min 0.107, median 0.231, max 33.926
+
+fastest
+  Best of dense, ESC, hash: 327 (100.0%)
+  cuSPARSE: 0 (0.0%)
+
+speedup of Best of dense, ESC, hash over cuSPARSE
+  geo-mean 6.226, min 1.983, median 4.515, max 90.041

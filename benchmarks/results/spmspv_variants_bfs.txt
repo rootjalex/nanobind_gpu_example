@@ -1,0 +1,19 @@
+inputs: 918
+excluded (a series failed): 0
+products: min 1, median 59817, max 36661886
+
+runtime in ms
+  Dense: geo-mean 0.059, min 0.042, median 0.054, max 6.364
+  ESC: geo-mean 0.085, min 0.042, median 0.085, max 2.264
+  Hash: geo-mean 0.082, min 0.046, median 0.070, max 1.380
+
+fastest
+  Dense: 824 (89.8%)
+  ESC: 65 (7.1%)
+  Hash: 29 (3.2%)
+
+speedup of Dense over ESC
+  geo-mean 1.438, min 0.275, median 1.538, max 3.100
+
+speedup of Dense over Hash
+  geo-mean 1.388, min 0.217, median 1.298, max 4.195
