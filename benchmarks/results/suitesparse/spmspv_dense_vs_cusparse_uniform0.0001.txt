@@ -1,14 +1,71 @@
 inputs: 327
-excluded (a series failed): 0
 products: min 3, median 396, max 77571
 
 runtime in ms
-  Dense: geo-mean 0.045, min 0.041, median 0.043, max 0.180
-  cuSPARSE: geo-mean 0.109, min 0.089, median 0.106, max 0.442
+  Dense (Ours): geo-mean 0.038, min 0.034, median 0.036, max 0.163
+  cuSPARSE: geo-mean 0.101, min 0.084, median 0.098, max 0.433
 
-fastest
-  Dense: 327 (100.0%)
-  cuSPARSE: 0 (0.0%)
+all inputs
+  fastest Dense (Ours): 327 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.654, min 1.558, median 2.737, max 4.428
 
-speedup of Dense over cuSPARSE
-  geo-mean 2.421, min 1.400, median 2.467, max 3.785
+structural: 73 inputs
+  fastest Dense (Ours): 73 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.708, min 2.122, median 2.739, max 3.447
+
+optimization: 39 inputs
+  fastest Dense (Ours): 39 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.566, min 2.081, median 2.645, max 2.962
+
+semiconductor: 33 inputs
+  fastest Dense (Ours): 33 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.689, min 2.080, median 2.775, max 3.095
+
+fluid dynamics: 30 inputs
+  fastest Dense (Ours): 30 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.710, min 2.095, median 2.759, max 4.428
+
+chemistry: 27 inputs
+  fastest Dense (Ours): 27 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.777, min 2.651, median 2.761, max 3.023
+
+2D/3D: 26 inputs
+  fastest Dense (Ours): 26 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.737, min 2.099, median 2.765, max 4.214
+
+power network: 23 inputs
+  fastest Dense (Ours): 23 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.746, min 2.164, median 2.778, max 3.100
+
+circuit simulation: 22 inputs
+  fastest Dense (Ours): 22 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.382, min 1.787, median 2.494, max 2.935
+
+graph: 15 inputs
+  fastest Dense (Ours): 15 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.438, min 1.558, median 2.610, max 2.966
+
+other: 15 inputs
+  fastest Dense (Ours): 15 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.705, min 2.090, median 2.737, max 3.271
+
+model reduction: 14 inputs
+  fastest Dense (Ours): 14 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.583, min 2.123, median 2.777, max 2.938
+
+electromagnetics: 10 inputs
+  fastest Dense (Ours): 10 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.588, min 2.100, median 2.642, max 2.911

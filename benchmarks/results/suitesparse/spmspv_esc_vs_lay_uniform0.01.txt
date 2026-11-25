@@ -1,0 +1,72 @@
+inputs: 326
+failed Li et al.: 1
+products: min 6541, median 43432, max 4481954
+
+runtime in ms
+  Ours: geo-mean 0.058, min 0.048, median 0.055, max 0.238
+  Li et al.: geo-mean 0.083, min 0.066, median 0.081, max 0.317
+
+all inputs
+  fastest Ours: 326 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.445, min 1.113, median 1.434, max 1.752
+
+structural: 73 inputs
+  fastest Ours: 73 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.407, min 1.173, median 1.394, max 1.723
+
+optimization: 38 inputs
+  fastest Ours: 38 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.490, min 1.247, median 1.515, max 1.752
+
+semiconductor: 33 inputs
+  fastest Ours: 33 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.419, min 1.241, median 1.411, max 1.685
+
+fluid dynamics: 30 inputs
+  fastest Ours: 30 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.460, min 1.195, median 1.474, max 1.695
+
+chemistry: 27 inputs
+  fastest Ours: 27 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.445, min 1.189, median 1.487, max 1.658
+
+2D/3D: 26 inputs
+  fastest Ours: 26 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.452, min 1.266, median 1.433, max 1.649
+
+power network: 23 inputs
+  fastest Ours: 23 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.493, min 1.253, median 1.490, max 1.717
+
+circuit simulation: 22 inputs
+  fastest Ours: 22 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.472, min 1.305, median 1.505, max 1.585
+
+graph: 15 inputs
+  fastest Ours: 15 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.489, min 1.274, median 1.474, max 1.748
+
+other: 15 inputs
+  fastest Ours: 15 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.437, min 1.113, median 1.488, max 1.572
+
+model reduction: 14 inputs
+  fastest Ours: 14 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.417, min 1.258, median 1.397, max 1.591
+
+electromagnetics: 10 inputs
+  fastest Ours: 10 (100.0%)
+  fastest Li et al.: 0 (0.0%)
+  speedup of Ours over Li et al.: geo-mean 1.392, min 1.143, median 1.401, max 1.638

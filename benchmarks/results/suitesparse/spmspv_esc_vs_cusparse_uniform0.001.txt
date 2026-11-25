@@ -1,14 +1,71 @@
 inputs: 327
-excluded (a series failed): 0
 products: min 647, median 4327, max 774777
 
 runtime in ms
-  ESC: geo-mean 0.060, min 0.040, median 0.060, max 0.116
-  cuSPARSE: geo-mean 0.141, min 0.100, median 0.109, max 3.331
+  ESC (Ours): geo-mean 0.043, min 0.030, median 0.040, max 0.092
+  cuSPARSE: geo-mean 0.133, min 0.093, median 0.102, max 3.319
 
-fastest
-  ESC: 327 (100.0%)
-  cuSPARSE: 0 (0.0%)
+all inputs
+  fastest ESC (Ours): 327 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 3.051, min 1.836, median 2.891, max 35.938
 
-speedup of ESC over cuSPARSE
-  geo-mean 2.331, min 1.287, median 2.193, max 28.617
+structural: 73 inputs
+  fastest ESC (Ours): 73 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 3.299, min 1.924, median 2.987, max 8.954
+
+optimization: 39 inputs
+  fastest ESC (Ours): 39 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 3.349, min 1.893, median 2.940, max 35.938
+
+semiconductor: 33 inputs
+  fastest ESC (Ours): 33 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 3.004, min 1.862, median 2.582, max 20.833
+
+fluid dynamics: 30 inputs
+  fastest ESC (Ours): 30 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 2.972, min 1.836, median 2.803, max 17.457
+
+chemistry: 27 inputs
+  fastest ESC (Ours): 27 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 2.796, min 2.325, median 2.888, max 3.319
+
+2D/3D: 26 inputs
+  fastest ESC (Ours): 26 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 3.057, min 1.860, median 2.630, max 20.192
+
+power network: 23 inputs
+  fastest ESC (Ours): 23 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 2.714, min 2.006, median 2.732, max 3.259
+
+circuit simulation: 22 inputs
+  fastest ESC (Ours): 22 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 2.746, min 1.899, median 2.600, max 4.374
+
+graph: 15 inputs
+  fastest ESC (Ours): 15 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 3.144, min 2.409, median 2.965, max 7.437
+
+other: 15 inputs
+  fastest ESC (Ours): 15 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 2.771, min 2.321, median 2.539, max 3.340
+
+model reduction: 14 inputs
+  fastest ESC (Ours): 14 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 3.059, min 2.319, median 2.810, max 5.686
+
+electromagnetics: 10 inputs
+  fastest ESC (Ours): 10 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of ESC (Ours) over cuSPARSE: geo-mean 3.141, min 1.852, median 2.844, max 7.630

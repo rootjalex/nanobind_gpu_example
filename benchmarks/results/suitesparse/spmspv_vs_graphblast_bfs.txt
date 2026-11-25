@@ -1,14 +1,72 @@
 inputs: 913
-excluded (a series failed): 5
-products: min 1, median 59779, max 36661886
+failed GraphBLAST: 5
+products: min 1, median 59989, max 36661886
 
 runtime in ms
-  ESC: geo-mean 0.084, min 0.042, median 0.085, max 2.264
-  GraphBLAST: geo-mean 0.086, min 0.053, median 0.082, max 2.455
+  ESC (Ours): geo-mean 0.059, min 0.031, median 0.054, max 2.238
+  GraphBLAST: geo-mean 0.090, min 0.056, median 0.084, max 2.458
 
-fastest
-  ESC: 472 (51.7%)
-  GraphBLAST: 441 (48.3%)
+all inputs
+  fastest ESC (Ours): 913 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.508, min 1.066, median 1.529, max 1.971
 
-speedup of ESC over GraphBLAST
-  geo-mean 1.022, min 0.800, median 1.007, max 1.394
+structural: 230 inputs
+  fastest ESC (Ours): 230 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.509, min 1.210, median 1.526, max 1.890
+
+semiconductor: 118 inputs
+  fastest ESC (Ours): 118 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.513, min 1.084, median 1.532, max 1.798
+
+fluid dynamics: 88 inputs
+  fastest ESC (Ours): 88 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.521, min 1.084, median 1.542, max 1.711
+
+chemistry: 86 inputs
+  fastest ESC (Ours): 86 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.493, min 1.172, median 1.517, max 1.661
+
+2D/3D: 78 inputs
+  fastest ESC (Ours): 78 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.532, min 1.132, median 1.554, max 1.894
+
+circuit simulation: 61 inputs
+  fastest ESC (Ours): 61 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.463, min 1.066, median 1.484, max 1.920
+
+power network: 50 inputs
+  fastest ESC (Ours): 50 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.507, min 1.099, median 1.524, max 1.971
+
+model reduction: 47 inputs
+  fastest ESC (Ours): 47 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.506, min 1.323, median 1.527, max 1.664
+
+optimization: 44 inputs
+  fastest ESC (Ours): 44 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.510, min 1.149, median 1.521, max 1.845
+
+other: 38 inputs
+  fastest ESC (Ours): 38 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.570, min 1.400, median 1.550, max 1.878
+
+graph: 37 inputs
+  fastest ESC (Ours): 37 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.451, min 1.066, median 1.512, max 1.680
+
+electromagnetics: 36 inputs
+  fastest ESC (Ours): 36 (100.0%)
+  fastest GraphBLAST: 0 (0.0%)
+  speedup of ESC (Ours) over GraphBLAST: geo-mean 1.514, min 1.318, median 1.533, max 1.854

@@ -1,19 +1,98 @@
 inputs: 327
-excluded (a series failed): 0
 products: min 83072, median 435580, max 77451184
 
 runtime in ms
-  Dense: geo-mean 0.072, min 0.043, median 0.062, max 2.222
-  ESC: geo-mean 0.115, min 0.072, median 0.096, max 5.765
-  Hash: geo-mean 0.138, min 0.064, median 0.114, max 8.570
+  Dense (Ours): geo-mean 0.056, min 0.034, median 0.047, max 2.203
+  ESC (Ours): geo-mean 0.085, min 0.048, median 0.065, max 5.745
+  Hash (Ours): geo-mean 0.115, min 0.052, median 0.092, max 8.562
 
-fastest
-  Dense: 319 (97.6%)
-  ESC: 8 (2.4%)
-  Hash: 0 (0.0%)
+all inputs
+  fastest Dense (Ours): 317 (96.9%)
+  fastest ESC (Ours): 10 (3.1%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.526, min 0.381, median 1.444, max 3.666
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.048, min 0.503, median 2.113, max 3.886
 
-speedup of Dense over ESC
-  geo-mean 1.587, min 0.412, median 1.564, max 3.581
+structural: 73 inputs
+  fastest Dense (Ours): 73 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.751, min 1.164, median 1.675, max 3.159
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.197, min 1.745, median 2.215, max 2.701
 
-speedup of Dense over Hash
-  geo-mean 1.913, min 0.513, median 1.935, max 3.857
+optimization: 39 inputs
+  fastest Dense (Ours): 34 (87.2%)
+  fastest ESC (Ours): 5 (12.8%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.364, min 0.567, median 1.373, max 2.608
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 1.855, min 0.649, median 1.899, max 3.886
+
+semiconductor: 33 inputs
+  fastest Dense (Ours): 33 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.569, min 1.338, median 1.436, max 2.381
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.126, min 1.865, median 2.132, max 3.409
+
+fluid dynamics: 30 inputs
+  fastest Dense (Ours): 30 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.497, min 1.187, median 1.415, max 3.666
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.037, min 1.858, median 1.967, max 2.298
+
+chemistry: 27 inputs
+  fastest Dense (Ours): 27 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.522, min 1.301, median 1.456, max 1.927
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.047, min 1.738, median 1.980, max 2.642
+
+2D/3D: 26 inputs
+  fastest Dense (Ours): 26 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.622, min 1.355, median 1.485, max 3.335
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.121, min 1.580, median 2.156, max 2.796
+
+power network: 23 inputs
+  fastest Dense (Ours): 23 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.408, min 1.140, median 1.388, max 1.826
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 1.970, min 1.559, median 1.905, max 2.728
+
+circuit simulation: 22 inputs
+  fastest Dense (Ours): 17 (77.3%)
+  fastest ESC (Ours): 5 (22.7%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.109, min 0.381, median 1.308, max 1.756
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 1.606, min 0.503, median 1.916, max 2.297
+
+graph: 15 inputs
+  fastest Dense (Ours): 15 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.501, min 1.056, median 1.507, max 1.908
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.243, min 1.873, median 2.267, max 2.771
+
+other: 15 inputs
+  fastest Dense (Ours): 15 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.492, min 1.095, median 1.448, max 1.767
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.052, min 1.523, median 2.004, max 2.349
+
+model reduction: 14 inputs
+  fastest Dense (Ours): 14 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.657, min 1.368, median 1.668, max 2.553
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.223, min 1.920, median 2.299, max 2.396
+
+electromagnetics: 10 inputs
+  fastest Dense (Ours): 10 (100.0%)
+  fastest ESC (Ours): 0 (0.0%)
+  fastest Hash (Ours): 0 (0.0%)
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.668, min 1.332, median 1.627, max 2.912
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 2.129, min 1.846, median 2.140, max 2.430

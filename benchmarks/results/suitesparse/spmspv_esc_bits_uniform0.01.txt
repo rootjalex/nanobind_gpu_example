@@ -1,14 +1,71 @@
 inputs: 327
-excluded (a series failed): 0
 products: min 6541, median 43863, max 7746840
 
 runtime in ms
-  ESC (min bits): geo-mean 0.086, min 0.063, median 0.086, max 0.519
-  ESC (32 bits): geo-mean 0.100, min 0.082, median 0.099, max 0.519
+  ESC (min bits): geo-mean 0.058, min 0.048, median 0.055, max 0.499
+  ESC (32 bits): geo-mean 0.068, min 0.056, median 0.066, max 0.500
 
-fastest
-  ESC (min bits): 327 (100.0%)
-  ESC (32 bits): 0 (0.0%)
+all inputs
+  fastest ESC (min bits): 327 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.173, min 1.001, median 1.187, max 1.390
 
-speedup of ESC (min bits) over ESC (32 bits)
-  geo-mean 1.158, min 1.000, median 1.151, max 1.399
+structural: 73 inputs
+  fastest ESC (min bits): 73 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.137, min 1.020, median 1.072, max 1.390
+
+optimization: 39 inputs
+  fastest ESC (min bits): 39 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.157, min 1.001, median 1.168, max 1.349
+
+semiconductor: 33 inputs
+  fastest ESC (min bits): 33 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.167, min 1.035, median 1.179, max 1.321
+
+fluid dynamics: 30 inputs
+  fastest ESC (min bits): 30 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.214, min 1.037, median 1.196, max 1.389
+
+chemistry: 27 inputs
+  fastest ESC (min bits): 27 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.189, min 1.025, median 1.189, max 1.388
+
+2D/3D: 26 inputs
+  fastest ESC (min bits): 26 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.194, min 1.035, median 1.205, max 1.364
+
+power network: 23 inputs
+  fastest ESC (min bits): 23 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.293, min 1.047, median 1.327, max 1.388
+
+circuit simulation: 22 inputs
+  fastest ESC (min bits): 22 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.127, min 1.028, median 1.105, max 1.237
+
+graph: 15 inputs
+  fastest ESC (min bits): 15 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.187, min 1.047, median 1.217, max 1.348
+
+other: 15 inputs
+  fastest ESC (min bits): 15 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.191, min 1.039, median 1.203, max 1.371
+
+model reduction: 14 inputs
+  fastest ESC (min bits): 14 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.141, min 1.027, median 1.184, max 1.228
+
+electromagnetics: 10 inputs
+  fastest ESC (min bits): 10 (100.0%)
+  fastest ESC (32 bits): 0 (0.0%)
+  speedup of ESC (min bits) over ESC (32 bits): geo-mean 1.134, min 1.046, median 1.160, max 1.224

@@ -1,14 +1,71 @@
 inputs: 327
-excluded (a series failed): 0
 products: min 3, median 396, max 77571
 
 runtime in ms
-  Best of dense, ESC, hash: geo-mean 0.044, min 0.039, median 0.042, max 0.100
-  cuSPARSE: geo-mean 0.109, min 0.089, median 0.106, max 0.442
+  Best of ours: geo-mean 0.035, min 0.030, median 0.032, max 0.066
+  cuSPARSE: geo-mean 0.101, min 0.084, median 0.098, max 0.433
 
-fastest
-  Best of dense, ESC, hash: 327 (100.0%)
-  cuSPARSE: 0 (0.0%)
+all inputs
+  fastest Best of ours: 327 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.904, min 2.118, median 2.996, max 6.536
 
-speedup of Best of dense, ESC, hash over cuSPARSE
-  geo-mean 2.464, min 1.777, median 2.511, max 4.405
+structural: 73 inputs
+  fastest Best of ours: 73 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.866, min 2.146, median 2.924, max 3.447
+
+optimization: 39 inputs
+  fastest Best of ours: 39 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.845, min 2.278, median 2.719, max 6.536
+
+semiconductor: 33 inputs
+  fastest Best of ours: 33 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.964, min 2.118, median 3.070, max 3.997
+
+fluid dynamics: 30 inputs
+  fastest Best of ours: 30 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 3.010, min 2.422, median 3.064, max 4.428
+
+chemistry: 27 inputs
+  fastest Best of ours: 27 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 3.068, min 2.734, median 3.058, max 3.374
+
+2D/3D: 26 inputs
+  fastest Best of ours: 26 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 3.021, min 2.437, median 3.067, max 4.214
+
+power network: 23 inputs
+  fastest Best of ours: 23 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 3.063, min 2.756, median 3.074, max 3.426
+
+circuit simulation: 22 inputs
+  fastest Best of ours: 22 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.634, min 2.424, median 2.560, max 3.416
+
+graph: 15 inputs
+  fastest Best of ours: 15 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.721, min 2.197, median 2.771, max 3.268
+
+other: 15 inputs
+  fastest Best of ours: 15 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.932, min 2.395, median 2.978, max 3.288
+
+model reduction: 14 inputs
+  fastest Best of ours: 14 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.807, min 2.177, median 2.956, max 3.215
+
+electromagnetics: 10 inputs
+  fastest Best of ours: 10 (100.0%)
+  fastest cuSPARSE: 0 (0.0%)
+  speedup of Best of ours over cuSPARSE: geo-mean 2.809, min 2.282, median 2.986, max 3.154

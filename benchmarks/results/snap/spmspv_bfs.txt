@@ -1,0 +1,32 @@
+runtime in ms                     Dense (Ours)              ESC (Ours)             Hash (Ours)                cuSPARSE              GraphBLAST    Dense-LB (Li et al.)  Dense-noLB (Li et al.)      ESC-LB (Li et al.)
+web-NotreDame                            1.919                   2.286                   2.764                   7.890                   3.544                   1.939                   2.022                   3.171
+com-Amazon                               1.126                   1.437                   1.786                   9.231                   2.169                   1.210                   0.811                   2.030
+com-DBLP                                 0.630                   0.822                   1.013                   7.905                   1.228                   0.662                   0.474                   1.134
+web-Stanford                             5.324                   6.021                   6.863                  17.926                   8.899                   4.841                   3.488                   8.130
+roadNet-PA                              23.147                  23.833                  31.716                  55.874                  39.471                  23.870                  16.646                  37.222
+amazon0601                               1.420                   1.797                   2.231                  12.687                   2.708                   1.485                   0.921                   2.534
+roadNet-TX                              35.926                  36.012                  47.508                  82.352                  58.990                  36.841                  26.161                  56.105
+wiki-Talk                                0.484                   0.574                   0.803                  20.406                   0.813                   0.648                   5.858                   0.865
+web-Google                               1.541                   1.740                   2.142                  16.821                   2.614                   1.719                   1.301                   2.541
+roadNet-CA                              24.033                  25.392                  34.909                  66.878                  42.420                  26.904                  18.506                  40.152
+com-Youtube                              0.890                   0.984                   1.233                  19.017                   1.427                   0.983                   2.723                   1.422
+web-BerkStan                            22.004                  23.568                  26.742                  54.226                  34.506                  23.613                  19.531                  34.548
+higgs-twitter                            0.815                   1.096                   1.247                  42.683                   1.460                   0.820                   0.927                   1.385
+cit-Patents                              0.646                   0.553                   0.705                   1.293                   0.873                     nan                   0.692                     nan
+as-Skitter                               1.585                   1.977                   1.870                  59.212                   2.528                   1.537                   9.314                   2.574
+wiki-topcats                            12.364                  11.562                  13.811                  99.857                  16.319                  12.600                  11.359                  16.660
+soc-Pokec                                1.084                   2.118                   1.785                 121.374                   2.550                   1.114                   2.140                   2.626
+soc-LiveJournal1                         2.150                   4.515                   3.438                 233.256                   5.283                   2.257                   4.722                   5.380
+com-LiveJournal                          2.035                   4.554                   3.284                 234.347                   5.263                   2.104                   4.564                   5.436
+com-Orkut                                4.417                  13.781                   7.623                 950.520                  15.229                   3.765                  10.156                  15.258
+
+failed Dense-LB (Li et al.): 1
+failed ESC-LB (Li et al.): 1
+over the matrices where both ran
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 1.300, min 0.856, median 1.189, max 3.120
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 1.427, min 1.092, median 1.446, max 1.726
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 13.575, min 2.001, median 9.925, max 215.196
+  speedup of Dense (Ours) over GraphBLAST: geo-mean 1.843, min 1.320, median 1.735, max 3.448
+  speedup of Dense (Ours) over Dense-LB (Li et al.): geo-mean 1.041, min 0.852, median 1.034, max 1.338
+  speedup of Dense (Ours) over Dense-noLB (Li et al.): geo-mean 1.349, min 0.649, median 0.986, max 12.104
+  speedup of Dense (Ours) over ESC-LB (Li et al.): geo-mean 1.827, min 1.347, median 1.671, max 3.454

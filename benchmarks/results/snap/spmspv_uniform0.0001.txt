@@ -1,0 +1,30 @@
+runtime in ms                     Dense (Ours)              ESC (Ours)             Hash (Ours)                cuSPARSE              GraphBLAST    Dense-LB (Li et al.)  Dense-noLB (Li et al.)      ESC-LB (Li et al.)
+web-NotreDame                            0.037                   0.039                   0.051                   0.092                   0.057                   0.038                   0.023                   0.052
+com-Amazon                               0.036                   0.039                   0.052                   0.093                   0.062                   0.032                   0.024                   0.059
+com-DBLP                                 0.036                   0.039                   0.053                   0.095                   0.062                   0.033                   0.026                   0.052
+web-Stanford                             0.036                   0.040                   0.052                   0.097                   0.055                   0.031                   0.025                   0.053
+roadNet-PA                               0.046                   0.040                   0.053                   0.100                   0.060                   0.047                   0.032                   0.060
+amazon0601                               0.036                   0.040                   0.054                   0.098                   0.060                   0.039                   0.025                   0.053
+roadNet-TX                               0.046                   0.039                   0.053                   0.100                   0.057                   0.047                   0.033                   0.061
+wiki-Talk                                0.046                   0.040                   0.054                   0.104                   0.058                   0.051                   0.047                   0.060
+web-Google                               0.038                   0.040                   0.055                   0.098                   0.058                   0.048                   0.034                   0.060
+roadNet-CA                               0.046                   0.040                   0.058                   0.095                   0.057                   0.049                   0.036                   0.060
+com-Youtube                              0.046                   0.039                   0.054                   0.096                   0.062                   0.047                   0.035                   0.060
+web-BerkStan                             0.036                   0.040                   0.054                   0.099                   0.060                   0.045                   0.038                   0.061
+higgs-twitter                            0.038                   0.039                   0.054                   0.100                   0.063                   0.047                   0.037                   0.053
+cit-Patents                              0.049                   0.040                   0.058                   0.100                   0.063                   0.060                   0.057                   0.063
+as-Skitter                               0.047                   0.040                   0.055                   0.103                   0.057                   0.049                   0.040                   0.061
+wiki-topcats                             0.046                   0.040                   0.063                   0.098                   0.059                   0.049                   0.073                   0.063
+soc-Pokec                                0.047                   0.040                   0.059                   0.105                   0.062                   0.047                   0.049                   0.063
+soc-LiveJournal1                         0.051                   0.053                   0.081                   0.130                   0.093                   0.071                   0.073                   0.082
+com-LiveJournal                          0.049                   0.052                   0.087                   0.130                   0.085                   0.061                   0.070                   0.080
+com-Orkut                                0.047                   0.053                   0.084                   0.183                   0.086                   0.060                   0.097                   0.083
+
+over the matrices where both ran
+  speedup of Dense (Ours) over ESC (Ours): geo-mean 0.969, min 0.814, median 1.033, max 1.133
+  speedup of Dense (Ours) over Hash (Ours): geo-mean 1.373, min 1.159, median 1.404, max 1.785
+  speedup of Dense (Ours) over cuSPARSE: geo-mean 2.450, min 2.052, median 2.536, max 3.886
+  speedup of Dense (Ours) over GraphBLAST: geo-mean 1.483, min 1.226, median 1.524, max 1.839
+  speedup of Dense (Ours) over Dense-LB (Li et al.): geo-mean 1.092, min 0.875, median 1.073, max 1.412
+  speedup of Dense (Ours) over Dense-noLB (Li et al.): geo-mean 0.939, min 0.635, median 0.878, max 2.056
+  speedup of Dense (Ours) over ESC-LB (Li et al.): geo-mean 1.443, min 1.285, median 1.409, max 1.763
