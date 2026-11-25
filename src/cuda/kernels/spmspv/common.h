@@ -3,7 +3,6 @@
 #include <climits>
 #include <cub/device/device_radix_sort.cuh>
 #include <cub/device/device_scan.cuh>
-#include <cuda/iterator>
 #include <cuda/std/algorithm>
 #include <cuda/std/bit>
 
@@ -31,34 +30,9 @@ void run_cub(F&& f) {
     CHECK_CUDA(f(temp.ptr, bytes));
 }
 
-// Number of products for the q-th nonzero of x
-struct ColumnLength {
-    const int32_t* pos;
-    const int32_t* x_crd;
-    int32_t x_nnz;
-
-    __host__ __device__ int32_t operator()(int32_t q) const {
-        if (q >= x_nnz) {
-            return 0;
-        }
-        const int32_t j = x_crd[q];
-        return pos[j + 1] - pos[j];
-    }
-};
-
 // Fills T (nnz(x) + 1 entries) with the offset of each column's products.
 // Returns the total number of products n, which is also T[nnz(x)].
-inline int32_t partition(const CSCMatrix& A, const SparseVector& x,
-                         int32_t* T) {
-    auto lengths =
-        cuda::make_transform_iterator(cuda::make_counting_iterator<int32_t>(0),
-                                      ColumnLength{A.pos, x.crd, x.nnz});
-    run_cub([&](void* temp, size_t& bytes) {
-        return cub::DeviceScan::ExclusiveSum(temp, bytes, lengths, T, x.nnz + 1,
-                                             DEFAULT_STREAM);
-    });
-    return read_scalar(T + x.nnz);
-}
+int32_t partition(const CSCMatrix& A, const SparseVector& x, int32_t* T);
 
 struct Product {
     int32_t i;

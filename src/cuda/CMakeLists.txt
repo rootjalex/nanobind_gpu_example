@@ -30,6 +30,7 @@ target_sources(
     kernels/spmspv/dense.cu
     kernels/spmspv/esc.cu
     kernels/spmspv/hash.cu
+    kernels/spmspv/partition.cu
     kernels/spmspv/spmspv.h
 )
 
