@@ -2,7 +2,7 @@
 # Builds the GraphBLAST SpMSpV benchmark in <workdir> without editing
 # GraphBLAST. Needs nvcc on PATH.
 #
-#   benchmarks/baselines/graphblast/build.sh <workdir>
+#   benchmarks/harness/graphblast/build.sh <workdir>
 #
 # The executable is <workdir>/grb_spmspv.
 set -euo pipefail

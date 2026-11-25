@@ -8,6 +8,13 @@
 // `using namespace graphblas;` and its own templates named first and second
 #include <cub/cub.cuh>
 
+// GraphBLAST allocates with cudaMalloc, which is far slower than the CUDA
+// memory pool that the other systems in the benchmark allocate from. Give it
+// the same kind of pool.
+#include "../../pool.h"
+#define cudaMalloc harness::pool_malloc
+#define cudaFree harness::pool_free
+
 // cudaThreadSynchronize was removed in CUDA 12
 inline cudaError_t cudaThreadSynchronize() { return cudaDeviceSynchronize(); }
 
